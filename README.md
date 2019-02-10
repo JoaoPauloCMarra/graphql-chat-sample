@@ -1,2 +1,5 @@
-# graphql-chat-sample
-a simple sample to help :)
+# Graphql Chat Sample
+
+**a simple sample to help :)**
+
+
