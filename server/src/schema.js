@@ -1,8 +1,9 @@
 export default `
   type Chat {
-    id: Int!
+    id: ID!
+    content: String!
     from: String!
-    message: String!
+    createdAt: String!
   }
 
   type Query {
@@ -10,9 +11,9 @@ export default `
   }
 
   type Mutation {
-    sendMessage(from: String!, message: String!): Chat
+    createChat(content: String!, from: String!) : Chat
   }
-
+  
   type Subscription {
     messageSent: Chat
   }

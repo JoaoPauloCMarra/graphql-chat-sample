@@ -1,0 +1,31 @@
+{
+  "name": "chat-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "./node_modules/react-scripts/bin/react-scripts.js start",
+    "build": "./node_modules/react-scripts/bin/react-scripts.js build",
+    "test": "./node_modules/react-scripts/bin/react-scripts.js test",
+    "eject": "./node_modules/react-scripts/bin/react-scripts.js eject"
+  },
+  "dependencies": {
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-scripts": "2.1.4",
+    "apollo-client-preset": "^1.0.6",
+    "apollo-link-ws": "^1.0.4",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
+    "react-apollo": "^2.0.4",
+    "subscriptions-transport-ws": "^0.9.4"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
