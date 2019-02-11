@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node ./dist/src/index.js",
-    "dev": "nodemon --exec babel-node ./src/index.js",
-    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./yarn.lock,./npm-debug.log --copy-files",
+    "dev": "./node_modules/nodemon/bin/nodemon.js --exec babel-node ./src/index.js",
+    "build": "./node_modules/rimraf/bin.js dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./yarn.lock,./npm-debug.log --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
