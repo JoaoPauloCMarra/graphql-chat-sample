@@ -9,15 +9,15 @@
     "eject": "./node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "dependencies": {
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-scripts": "2.1.4",
     "apollo-client-preset": "^1.0.6",
     "apollo-link-ws": "^1.0.4",
-    "graphql": "^0.12.3",
+    "graphql": "^14.1.1",
     "graphql-tag": "^2.6.1",
+    "react": "^16.8.1",
     "react-apollo": "^2.0.4",
-    "subscriptions-transport-ws": "^0.9.4"
+    "react-dom": "^16.8.1",
+    "react-scripts": "2.1.4",
+    "subscriptions-transport-ws": "^0.9.15"
   },
   "eslintConfig": {
     "extends": "react-app"
