@@ -27,4 +27,4 @@ const Chatbox = ({ message }) => (
   </div>
 );
 
-export default Chatbox;
+export default React.memo(Chatbox);
