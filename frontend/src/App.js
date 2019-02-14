@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import Signup from './components/Signup';
 import Chatbox from './components/Chatbox';
 
 const style = {
@@ -51,7 +52,7 @@ const style = {
 };
 
 const App = ({ chatsQuery, createChatMutation }) => {
-  const [from, setFrom] = useState('anonymous');
+  const [from, setFrom] = useState('');
   const [content, setContent] = useState('');
 
   const subscribeToNewChats = () => {
@@ -78,8 +79,6 @@ const App = ({ chatsQuery, createChatMutation }) => {
   };
 
   useEffect(() => {
-    const from = window.prompt('username');
-    from && setFrom(from);
     subscribeToNewChats();
   }, []);
 
@@ -91,6 +90,16 @@ const App = ({ chatsQuery, createChatMutation }) => {
       setContent('');
     }
   };
+
+  if (!from || from.length === 0) {
+    return (
+      <div style={style.wrapper}>
+        <div>
+          <Signup signin={from => setFrom(from)} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={style.wrapper}>
