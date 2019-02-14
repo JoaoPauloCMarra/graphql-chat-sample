@@ -7,13 +7,16 @@ import Chatbox from './components/Chatbox';
 
 const style = {
   wrapper: {
+    backgroundColor: '#ddd',
     margin: '0 auto',
     padding: '0 15',
     width: '100%',
     maxWidth: '960px'
   },
+  signupWrapper: {
+    padding: 50
+  },
   chatWrapper: {
-    backgroundColor: '#ddd',
     padding: 10
   },
   chatTitleWrapper: {
@@ -95,7 +98,7 @@ const App = ({ chatsQuery, createChatMutation }) => {
   if (!from || from.length === 0) {
     return (
       <div style={style.wrapper}>
-        <div>
+        <div style={style.signupWrapper}>
           <Signup signin={from => setFrom(from)} />
         </div>
       </div>

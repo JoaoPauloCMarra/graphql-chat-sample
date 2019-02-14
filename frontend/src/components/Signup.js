@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 
 const style = {
   wrapper: {
-    backgroundColor: '#f2f2f2',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 5
   },
   label: {
@@ -41,17 +44,20 @@ const Signup = ({ signin }) => {
       <div style={style.label}>
         <label>Your username:</label>
       </div>
-      <input
-        style={style.input}
-        type="text"
-        placeholder="your username"
-        value={username}
-        onKeyPress={submit}
-        onChange={e => setUsername(e.target.value)}
-      />
-      <button style={style.button} onClick={() => signin(username)}>
-        enter
-      </button>
+
+      <div>
+        <input
+          style={style.input}
+          type="text"
+          placeholder="your username"
+          value={username}
+          onKeyPress={submit}
+          onChange={e => setUsername(e.target.value)}
+        />
+        <button style={style.button} onClick={() => signin(username)}>
+          enter
+        </button>
+      </div>
     </div>
   );
 };
