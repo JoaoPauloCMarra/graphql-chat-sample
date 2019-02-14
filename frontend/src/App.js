@@ -34,6 +34,7 @@ const style = {
   },
   username: {
     color: '#5887a7',
+    cursor: 'pointer',
     fontSize: 16,
     fontWeight: 'normal',
     textAlign: 'right'
@@ -107,7 +108,13 @@ const App = ({ chatsQuery, createChatMutation }) => {
         <div style={style.chatTitleWrapper}>
           <h2 style={style.chatTitle}>
             <span>Chat</span>
-            <span style={style.username}>{from}</span>
+            <span
+              style={style.username}
+              onClick={() => setFrom('')}
+              title="logout"
+            >
+              {from}
+            </span>
           </h2>
         </div>
         {chatsQuery.chats &&
