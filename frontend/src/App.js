@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -15,9 +15,27 @@ const style = {
     backgroundColor: '#ddd',
     padding: 10
   },
+  chatTitleWrapper: {
+    backgroundColor: '#6fb0dc',
+    borderBottom: '1px solid #5887a7',
+    padding: '20px 10px'
+  },
   chatTitle: {
-    backgroundColor: 'rgb(111,176,220)',
-    padding: '5px 10px'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+    margin: 0,
+    padding: 0,
+    width: '100%'
+  },
+  username: {
+    color: '#5887a7',
+    fontSize: 16,
+    fontWeight: 'normal',
+    textAlign: 'right'
   },
   chatInputWrapper: {
     backgroundColor: '#FFFFFF'
@@ -32,30 +50,11 @@ const style = {
   }
 };
 
-class App extends Component {
-  state = {
-    from: 'anonymous',
-    content: ''
-  };
+const App = ({ chatsQuery, createChatMutation }) => {
+  const [from, setFrom] = useState('anonymous');
+  const [content, setContent] = useState('');
 
-  componentDidMount() {
-    const from = window.prompt('username');
-    from && this.setState({ from });
-    this.subscribeToNewChats();
-  }
-
-  createChat = async e => {
-    if (e.key === 'Enter') {
-      const { content, from } = this.state;
-      await this.props.createChatMutation({
-        variables: { content, from }
-      });
-      this.setState({ content: '' });
-    }
-  };
-
-  subscribeToNewChats = () => {
-    const { chatsQuery } = this.props;
+  const subscribeToNewChats = () => {
     chatsQuery.subscribeToMore({
       document: gql`
         subscription MessageSentSubscription {
@@ -78,36 +77,52 @@ class App extends Component {
     });
   };
 
-  render() {
-    const { content } = this.state;
-    const {
-      chatsQuery: { chats = [] }
-    } = this.props;
+  useEffect(() => {
+    const from = window.prompt('username');
+    from && setFrom(from);
+    subscribeToNewChats();
+  }, []);
 
-    return (
-      <div style={style.wrapper}>
-        <div style={style.chatWrapper}>
-          <div style={style.chatTitle}>
-            <h2>Chats</h2>
-          </div>
-          {chats.map(message => (
-            <Chatbox key={message.id} message={message} />
-          ))}
-          <div style={style.chatInputWrapper}>
-            <input
-              style={style.chatInput}
-              type="text"
-              placeholder="Start typing"
-              value={content}
-              onKeyPress={this.createChat}
-              onChange={e => this.setState({ content: e.target.value })}
+  const createChat = async e => {
+    if (e.key === 'Enter') {
+      await createChatMutation({
+        variables: { content, from }
+      });
+      setContent('');
+    }
+  };
+
+  return (
+    <div style={style.wrapper}>
+      <div style={style.chatWrapper}>
+        <div style={style.chatTitleWrapper}>
+          <h2 style={style.chatTitle}>
+            <span>Chat</span>
+            <span style={style.username}>{from}</span>
+          </h2>
+        </div>
+        {chatsQuery.chats &&
+          chatsQuery.chats.map(message => (
+            <Chatbox
+              key={message.id}
+              message={message}
+              currentUser={message.from === from}
             />
-          </div>
+          ))}
+        <div style={style.chatInputWrapper}>
+          <input
+            style={style.chatInput}
+            type="text"
+            placeholder="Start typing"
+            value={content}
+            onKeyPress={createChat}
+            onChange={e => setContent(e.target.value)}
+          />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const CHATS_QUERY = gql`
   query chatsQuery {

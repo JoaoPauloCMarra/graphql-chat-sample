@@ -18,10 +18,16 @@ const style = {
   }
 };
 
-const Chatbox = ({ message }) => (
+const Chatbox = ({ message, currentUser }) => (
   <div style={style.wrapper}>
     <div style={style.message}>
-      <h5 style={style.author}>{message.from}</h5>
+      <h5
+        style={
+          !!currentUser ? { ...style.author, color: '#5887a7' } : style.author
+        }
+      >
+        {message.from}
+      </h5>
       <p style={style.message}>{message.content}</p>
     </div>
   </div>
