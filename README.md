@@ -19,3 +19,7 @@
 `yarn install` or `npm install`
 - to run locally watching for changes:
 `yarn start` or `npm run start`
+
+### Article
+
+[Link to Medium](https://medium.com/reactbrasil/build-a-chat-with-graphql-react-and-new-stuff-75ee4ffd2f2e)
